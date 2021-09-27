@@ -63,6 +63,8 @@ Secret
 -----
 
 + Key Valult 만들기
+자격 증명 모음을 만들려면 Azure Cloud Shell에서 다음 명령을 실행합니다. 
+--name 매개 변수에 고유한 자격 증명 모음 이름을 입력해야 합니다.
 
 ```
 az keyvault create \
@@ -70,3 +72,16 @@ az keyvault create \
     --location centralus \
     --name <your-unique-vault-name>
 ```
+완료되면 새 자격 증명 모음을 설명하는 JSON 출력이 표시됩니다.
+
++ 비밀 추가
+
+```
+az keyvault secret set \
+    --name SecretPassword \
+    --value reindeer_flotilla \
+    --vault-name <your-unique-vault-name>
+```
+
+여기서 사용할 비밀의 이름은 SecretPassword 이고, 값은 reindeer_flotilla 입니다. 
+--vault-name 매개 변수에 고유한 자격 증명 모음 이름을 입력해야 합니다.
