@@ -85,3 +85,41 @@ az keyvault secret set \
 
 여기서 사용할 비밀의 이름은 SecretPassword 이고, 값은 reindeer_flotilla 입니다. 
 --vault-name 매개 변수에 고유한 자격 증명 모음 이름을 입력해야 합니다.
+
++ Key Valult 사용하기
+
+
+```
+import os
+import cmd
+from azure.keyvault.secrets import SecretClient
+from azure.identity import DefaultAzureCredential
+
+keyVaultName = os.environ["KEY_VAULT_NAME"]
+KVUri = f"https://{keyVaultName}.vault.azure.net"
+
+credential = DefaultAzureCredential()
+client = SecretClient(vault_url=KVUri, credential=credential)
+
+secretName = input("Input a name for your secret > ")
+secretValue = input("Input a value for your secret > ")
+
+print(f"Creating a secret in {keyVaultName} called '{secretName}' with the value '{secretValue}' ...")
+
+client.set_secret(secretName, secretValue)
+
+print(" done.")
+
+print(f"Retrieving your secret from {keyVaultName}.")
+
+retrieved_secret = client.get_secret(secretName)
+
+print(f"Your secret is '{retrieved_secret.value}'.")
+print(f"Deleting your secret from {keyVaultName} ...")
+
+poller = client.begin_delete_secret(secretName)
+deleted_secret = poller.result()
+
+print(" done.")
+
+```
