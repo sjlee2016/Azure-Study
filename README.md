@@ -57,3 +57,16 @@ Secret
 + Vault에서 관리하는 비밀 객체이다.
 
 + Secret은 일정 주기를 가지며, 해당 주기가 만료되면 폐기해야 한다.
+
+
+사용 예시 
+-----
+
++ Key Valult 만들기
+
+```
+az keyvault create \
+    --resource-group [sandbox resource group name] \
+    --location centralus \
+    --name <your-unique-vault-name>
+```
