@@ -88,7 +88,13 @@ az keyvault secret set \
 
 + Key Valult 사용하기
 
+```
+export KEY_VAULT_NAME=<your-key-vault-name>
+```
+Environment 변수 설정한다.
 
+
+Keyvault 사용 샘플 파이썬코드
 ```
 import os
 import cmd
